@@ -4957,7 +4957,9 @@ pub const LinkerContext = struct {
             entry_bits.set(entry_bit);
 
             if (this.options.experimental_css) {
+                std.debug.print("frjae", .{});
                 if (this.graph.ast.items(.css)[source_index]) |*css| {
+                    std.debug.print("rqenc", .{});
                     _ = css; // autofix
                     // Create a chunk for the entry point here to ensure that the chunk is
                     // always generated even if the resulting file is empty
@@ -4981,6 +4983,7 @@ pub const LinkerContext = struct {
                     };
                     continue;
                 }
+                std.debug.print("kvmnp", .{});
             }
             // Create a chunk for the entry point here to ensure that the chunk is
             // always generated even if the resulting file is empty
@@ -5489,7 +5492,7 @@ pub const LinkerContext = struct {
                     source_index,
                 ) catch bun.outOfMemory();
 
-                const repr: *const bun.css.BundlerStyleSheet = visitor.css_asts[source_index.get()].?;
+                const repr: *const bun.css.BundlerStyleSheet = visitor.css_asts[source_index.get()] orelse return;
                 const top_level_rules = &repr.rules;
 
                 // TODO: should we even do this? @import rules have to be the first rules in the stylesheet, why even allow pre-import layers?
